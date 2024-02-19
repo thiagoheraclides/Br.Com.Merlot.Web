@@ -1,7 +1,14 @@
+using Br.Com.Merlot.Data.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// EF Core Database Config
+builder.Services.AddDbContext<ApplicationContext>(
+    options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
 var app = builder.Build();
 
