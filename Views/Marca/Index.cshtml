@@ -1,0 +1,98 @@
+﻿@model IEnumerable<TipoProdutoViewModel>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Marcas</h1>
+    <div class="container-md">
+        <div class="row">
+            <div class="col mb-3">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary" onclick="adicionar();">
+                        Adicionar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mb-5">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (Model is not null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Nome</td>
+                                    <td> - </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="mdl-marca" tabindex="-1" aria-labelledby="mdl-marca" aria-hidden="true">
+    <div class="modal-dialog modal-lg" id="modal-dialog"></div>
+</div>
+
+@section Scripts {
+    <script>
+        function adicionar() {
+            $.ajax({
+                url: '/Marca/Adicionar',
+                type: 'GET',
+                success: function (data) {
+                    $('#modal-dialog').html(data);
+                    $('#mdl-marca').modal('show');
+                },
+                error: function (error) {
+                    alert(error.responseText);
+                }
+            });
+        }
+        function editar(marcaId) {
+            $.ajax({
+                url: '/Marca/Atualizar',
+                type: 'GET',
+                data: { id: marcaId },
+                success: function (data) {
+                    console.log(data);
+                    $('#modal-dialog').html(data);
+                    $('#mdl-marca').modal('show');
+                },
+                error: function (error) {
+                    alert(error.responseText);
+                }
+            });
+        }
+        function excluir(marcaId) {
+            $.ajax({
+                url: '/Marca/Excluir',
+                type: 'GET',
+                data: { id: marcaId },
+                success: function (data) {
+                    $('#modal-dialog').html(data);
+                    $('#mdl-marca').modal('show');
+                },
+                error: function (error) {
+                    alert(error.responseText);
+                }
+            });
+        }
+    </script>
+}

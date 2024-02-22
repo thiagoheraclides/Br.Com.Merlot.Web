@@ -1,0 +1,18 @@
+﻿@model TipoProdutoViewModel
+
+<form asp-controller="Produto" asp-action="Excluir" method="post">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-6" id="exampleModalLabel">Excluir tipo de produto</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input asp-for="Id" type="hidden">
+            <p>Confirma a exclusão do tipo de produto: @Model.Nome ?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+            <button type="submit" class="btn btn-primary">Sim</button>
+        </div>
+    </div>
+</form>    

@@ -1,3 +1,5 @@
+using Br.Com.Merlot.Aplicacao.Interfaces;
+using Br.Com.Merlot.Aplicacao.Services;
 using Br.Com.Merlot.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,10 @@ builder.Services.AddControllersWithViews();
 // EF Core Database Config
 builder.Services.AddDbContext<ApplicationContext>(
     options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+
+builder.Services.AddScoped<ITipoProdutoService, TipoProdutoService>();
+builder.Services.AddScoped<IMarcaService, MarcaService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 
 var app = builder.Build();
 
